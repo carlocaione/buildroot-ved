@@ -1,0 +1,36 @@
+diff -rupN linux-custom/arch/arm/mach-meson6/clock.c linux-custom-p/arch/arm/mach-meson6/clock.c
+--- linux-custom/arch/arm/mach-meson6/clock.c	2014-05-18 13:46:48.826552861 +0200
++++ linux-custom-p/arch/arm/mach-meson6/clock.c	2014-05-18 13:47:45.642549817 +0200
+@@ -931,7 +931,7 @@ struct clk_change_info{
+ #define MESON_CPU_SLEEP		1
+ #define MESON_CPU_WAKEUP	2
+ 
+-inline void meson_set_cpu_ctrl_reg(int value)
++void meson_set_cpu_ctrl_reg(int value)
+ {
+ 	spin_lock(&clockfw_lock);
+ 	aml_write_reg32(MESON_CPU_CONTROL_REG, value);
+diff -rupN linux-custom/arch/arm/mach-meson6/hotplug.c linux-custom-p/arch/arm/mach-meson6/hotplug.c
+--- linux-custom/arch/arm/mach-meson6/hotplug.c	2014-05-18 13:46:56.050552474 +0200
++++ linux-custom-p/arch/arm/mach-meson6/hotplug.c	2014-05-18 13:48:14.746548257 +0200
+@@ -15,7 +15,7 @@
+ 
+ #include <linux/module.h>
+ 
+-extern inline void meson_set_cpu_ctrl_reg(int value);
++extern void meson_set_cpu_ctrl_reg(int value);
+ 
+ int platform_cpu_kill(unsigned int cpu)
+ {
+diff -rupN linux-custom/arch/arm/mach-meson6/platsmp.c linux-custom-p/arch/arm/mach-meson6/platsmp.c
+--- linux-custom/arch/arm/mach-meson6/platsmp.c	2014-05-18 13:47:04.706552010 +0200
++++ linux-custom-p/arch/arm/mach-meson6/platsmp.c	2014-05-18 13:48:30.578547409 +0200
+@@ -22,7 +22,7 @@
+ #include <asm/mach-types.h>
+ 
+ extern void meson_secondary_startup(void);
+-extern inline void meson_set_cpu_ctrl_reg(int value);
++extern void meson_set_cpu_ctrl_reg(int value);
+ 
+ /*
+  * control for which core is the next to come out of the secondary
