@@ -1,6 +1,7 @@
-config BR2_PACKAGE_QT5GRAPHICALEFFECTS
-	bool "qt5graphicaleffects"
+config BR2_PACKAGE_QT5QUICKCONTROLS
+	bool "qt5quickcontrols"
 	select BR2_PACKAGE_QT5BASE
+	select BR2_PACKAGE_QT5BASE_NETWORK
 	select BR2_PACKAGE_QT5DECLARATIVE
 	depends on BR2_PACKAGE_QT5_JSCORE_AVAILABLE
 	depends on BR2_PACKAGE_HAS_LIBEGL
@@ -9,10 +10,10 @@ config BR2_PACKAGE_QT5GRAPHICALEFFECTS
 	  Qt is a cross-platform application and UI framework for
 	  developers using C++.
 
-	  This package corresponds to the qt5graphicaleffects module.
+	  This package corresponds to the qt5quickcontrols module.
 
 	  http://qt-project.org
 
-comment "qt5graphicaleffects requires an OpenGL-capable backend"
+comment "qt5quickcontrols requires an OpenGL-capable backend"
 	depends on (!BR2_PACKAGE_HAS_LIBEGL || !BR2_PACKAGE_HAS_LIBGLES) && \
 		BR2_PACKAGE_QT5_JSCORE_AVAILABLE
