@@ -73,6 +73,7 @@ BR2_PACKAGE_LIBEVENT=y
 BR2_PACKAGE_ICU=y
 BR2_PACKAGE_CJSON=y
 BR2_PACKAGE_LIBXSLT=y
+BR2_PACKAGE_MONO=y
 BR2_PACKAGE_DHCPCD=y
 BR2_PACKAGE_DNSMASQ=y
 # BR2_PACKAGE_DNSMASQ_TFTP is not set
@@ -90,6 +91,7 @@ BR2_TARGET_ROOTFS_TAR_GZIP=y
 BR2_LINUX_KERNEL=y
 BR2_LINUX_KERNEL_CUSTOM_TARBALL=y
 BR2_LINUX_KERNEL_CUSTOM_TARBALL_LOCATION="https://www.dropbox.com/s/gti85ykpz0ioxxt/kernel_sourcecode_20140404.tar.bz2"
+BR2_LINUX_KERNEL_PATCH="/home/carlo/projects/buildroot-ved/board/amlogic/meson_g18/kernel/extern_fix.patch"
 BR2_LINUX_KERNEL_USE_CUSTOM_CONFIG=y
 BR2_TARGET_BOARD_PLATFORM="meson6"
 BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE="/home/carlo/projects/buildroot-ved/board/amlogic/meson_g18/configs/vegv_defconfig"
