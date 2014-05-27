@@ -1,0 +1,96 @@
+diff -ruN qt5base-5.2.1/mkspecs/devices/linux-arm-amlogic-8726M-g++/qeglfshooks_8726m.cpp q/mkspecs/devices/linux-arm-amlogic-8726M-g++/qeglfshooks_8726m.cpp
+--- qt5base-5.2.1/mkspecs/devices/linux-arm-amlogic-8726M-g++/qeglfshooks_8726m.cpp	2014-02-01 21:37:37.000000000 +0100
++++ q/mkspecs/devices/linux-arm-amlogic-8726M-g++/qeglfshooks_8726m.cpp	2014-05-24 17:05:54.167826329 +0200
+@@ -1,38 +1,38 @@
+ /****************************************************************************
+ **
+-** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+-** Contact: http://www.qt-project.org/legal
++** Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).
++** Contact: http://www.qt-project.org/
+ **
+ ** This file is part of the qmake spec of the Qt Toolkit.
+ **
+ ** $QT_BEGIN_LICENSE:LGPL$
+-** Commercial License Usage
+-** Licensees holding valid commercial Qt licenses may use this file in
+-** accordance with the commercial license agreement provided with the
+-** Software or, alternatively, in accordance with the terms contained in
+-** a written agreement between you and Digia.  For licensing terms and
+-** conditions see http://qt.digia.com/licensing.  For further information
+-** use the contact form at http://qt.digia.com/contact-us.
+-**
+ ** GNU Lesser General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU Lesser
+-** General Public License version 2.1 as published by the Free Software
+-** Foundation and appearing in the file LICENSE.LGPL included in the
+-** packaging of this file.  Please review the following information to
+-** ensure the GNU Lesser General Public License version 2.1 requirements
+-** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
++** This file may be used under the terms of the GNU Lesser General Public
++** License version 2.1 as published by the Free Software Foundation and
++** appearing in the file LICENSE.LGPL included in the packaging of this
++** file. Please review the following information to ensure the GNU Lesser
++** General Public License version 2.1 requirements will be met:
++** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ **
+-** In addition, as a special exception, Digia gives you certain additional
+-** rights.  These rights are described in the Digia Qt LGPL Exception
++** In addition, as a special exception, Nokia gives you certain additional
++** rights. These rights are described in the Nokia Qt LGPL Exception
+ ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+ **
+ ** GNU General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU
+-** General Public License version 3.0 as published by the Free Software
+-** Foundation and appearing in the file LICENSE.GPL included in the
+-** packaging of this file.  Please review the following information to
+-** ensure the GNU General Public License version 3.0 requirements will be
+-** met: http://www.gnu.org/copyleft/gpl.html.
++** Alternatively, this file may be used under the terms of the GNU General
++** Public License version 3.0 as published by the Free Software Foundation
++** and appearing in the file LICENSE.GPL included in the packaging of this
++** file. Please review the following information to ensure the GNU General
++** Public License version 3.0 requirements will be met:
++** http://www.gnu.org/copyleft/gpl.html.
++**
++** Other Usage
++** Alternatively, this file may be used in accordance with the terms and
++** conditions contained in a signed written agreement between you and Nokia.
++**
++**
++**
++**
+ **
+ **
+ ** $QT_END_LICENSE$
+@@ -47,6 +47,7 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ #include <linux/fb.h>
++#include <unistd.h>
+ 
+ QT_BEGIN_NAMESPACE
+ 
+@@ -54,7 +55,7 @@
+ {
+ public:
+     virtual QSize screenSize() const;
+-    virtual EGLNativeWindowType createNativeWindow(QPlatformWindow *window, const QSize &size, const QSurfaceFormat &format);
++    virtual EGLNativeWindowType createNativeWindow(const QSize &size);
+     virtual void destroyNativeWindow(EGLNativeWindowType window);
+ };
+ 
+@@ -75,11 +76,8 @@
+     return QSize(vinfo.xres, vinfo.yres);
+ }
+ 
+-EGLNativeWindowType QEglFS8726MHooks::createNativeWindow(QPlatformWindow *window, const QSize &size, const QSurfaceFormat &format)
++EGLNativeWindowType QEglFS8726MHooks::createNativeWindow(const QSize &size)
+ {
+-    Q_UNUSED(window)
+-    Q_UNUSED(format)
+-
+     fbdev_window *window = new fbdev_window;
+     window->width = size.width();
+     window->height = size.height();
